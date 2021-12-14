@@ -6,7 +6,7 @@
 [cs234 2019 class website](https://web.stanford.edu/class/cs234/CS234Win2019/schedule.html)
 
 
-## Lecture 1: 
+## 1, Introduction
 
 [lecture 1 slide](lecture/lecture1.pdf)
 
