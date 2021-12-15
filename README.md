@@ -11,9 +11,17 @@
 [lecture 1 slide](lecture/lecture1.pdf)
 
 
+- Additional Materials:
+    - High level introduction: SB (Sutton and Barton) Chp 1
+
+
 ## 2. Given a Model of the World
 
 [lecture 2 slide](lecture/lecture2.pdf)
+
+- Additional Materials:
+    - SB (Sutton and Barton) Chp 3, 4.1-4.4
+
 
 
 
