@@ -11,5 +11,11 @@
 [lecture 1 slide](lecture/lecture1.pdf)
 
 
+## 2. Given a Model of the World
+
+[lecture 2 slide](lecture/lecture2.pdf)
+
+
+
 
 
