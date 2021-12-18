@@ -22,7 +22,13 @@
 - Additional Materials:
     - SB (Sutton and Barton) Chp 3, 4.1-4.4
 
+## 3. Model-Free Policy Evaluation
 
+[lecture 3 slide](lecture/lecture3.pdf)
+
+- Additional Materials:
+    - SB (Sutton and Barton) Chp 5.1, 5.5, 6.1-6.3
+    - David Silver's Lecture 4 [link](http://www0.cs.ucl.ac.uk/staff/d.silver/web/Teaching.html)
 
 
 
