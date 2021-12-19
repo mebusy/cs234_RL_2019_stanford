@@ -28,7 +28,7 @@
 
 - Additional Materials:
     - SB (Sutton and Barton) Chp 5.1, 5.5, 6.1-6.3
-    - David Silver's Lecture 4 [link](http://www0.cs.ucl.ac.uk/staff/d.silver/web/Teaching.html)
+    - David Silver's Lecture 4 [link](https://www.davidsilver.uk/teaching/)
 
 
 
