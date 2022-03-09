@@ -27,13 +27,14 @@ class LinearSchedule(object):
         ##############################################################
         """
         TODO: modify self.epsilon such that
-			  it is a linear interpolation from self.eps_begin to
-			  self.eps_end as t goes from 0 to self.nsteps
-			  For t > self.nsteps self.epsilon remains constant
+              it is a linear interpolation from self.eps_begin to
+              self.eps_end as t goes from 0 to self.nsteps
+              For t > self.nsteps self.epsilon remains constant
         """
         ##############################################################
         ################ YOUR CODE HERE - 3-4 lines ##################
-		pass
+        pass
+        self.epsilon = np.interp( t , [0,self.nsteps], [self.eps_begin,self.eps_end] )
 
         ##############################################################
         ######################## END YOUR CODE ############## ########
@@ -77,7 +78,9 @@ class LinearExploration(LinearSchedule):
         """
         ##############################################################
         ################ YOUR CODE HERE - 4-5 lines ##################
-		pass
+
+        return best_action if np.random.random() > self.epsilon else self.env.action_space.sample()
+
         ##############################################################
         ######################## END YOUR CODE #######################
 
