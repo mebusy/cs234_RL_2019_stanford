@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-from torch.tensor import Tensor
+from torch import Tensor
 from utils.test_env import EnvTest
 from core.deep_q_learning_torch import DQN
 from q2_schedule import LinearExploration, LinearSchedule
@@ -17,7 +17,7 @@ class Linear(DQN):
     def initialize_models(self):
         """Creates the 2 separate networks (Q network and Target network). The input
         to these models will be an img_height * img_width image
-        with channels = n_channels * self.config.state_history
+        with channels = *n_channels * self.config.state_history*
 
         1. Set self.q_network to be a linear layer with num_actions as the output size
         2. Set self.target_network to be the same configuration self.q_network but initialized from scratch
@@ -34,6 +34,10 @@ class Linear(DQN):
 
         ##############################################################
         ################ YOUR CODE HERE (2 lines) ##################
+
+        # nn.Linear( in_features, out_features, bias=True )
+        self.q_network = nn.Linear( img_height* img_width* n_channels, num_actions )
+        self.target_network = nn.Linear( img_height* img_width* n_channels, num_actions )
 
         ##############################################################
         ######################## END YOUR CODE #######################
@@ -61,6 +65,9 @@ class Linear(DQN):
         ##############################################################
         ################ YOUR CODE HERE - 3-5 lines ##################
 
+        nn_net = getattr(self, network)
+        out = nn_net( torch.flatten( state , start_dim=1) )  # forward ( batch_size ,  flatten_features )
+
         ##############################################################
         ######################## END YOUR CODE #######################
 
@@ -84,6 +91,15 @@ class Linear(DQN):
 
         ##############################################################
         ################### YOUR CODE HERE - 1-2 lines ###############
+
+        PATH = "weights.pt"
+        # save
+        torch.save(self.q_network.state_dict(), PATH)
+        # load
+        self.target_network.load_state_dict(torch.load(PATH))
+        # Remember that you must call model.eval() to set dropout and batch normalization layers to evaluation mode before running inference. 
+        # Failing to do this will yield inconsistent inference results.
+        self.target_network.eval()
 
         ##############################################################
         ######################## END YOUR CODE #######################
