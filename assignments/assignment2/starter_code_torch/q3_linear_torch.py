@@ -10,6 +10,11 @@ from q2_schedule import LinearExploration, LinearSchedule
 from configs.q3_linear import config
 
 
+# Disable matplotlib  findfont warning...
+import logging
+logging.getLogger('matplotlib.font_manager').disabled = True
+
+
 class Linear(DQN):
     """
     Implement Fully Connected with Tensorflow
