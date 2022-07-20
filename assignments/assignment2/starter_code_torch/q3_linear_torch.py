@@ -31,13 +31,15 @@ class Linear(DQN):
         state_shape = list(self.env.observation_space.shape)
         img_height, img_width, n_channels = state_shape
         num_actions = self.env.action_space.n
+        print("num_actions: ", num_actions )
 
         ##############################################################
         ################ YOUR CODE HERE (2 lines) ##################
 
         # nn.Linear( in_features, out_features, bias=True )
-        self.q_network = nn.Linear( img_height* img_width* n_channels, num_actions )
-        self.target_network = nn.Linear( img_height* img_width* n_channels, num_actions )
+        channels = n_channels * self.config.state_history
+        self.q_network = nn.Linear( img_height* img_width* channels , num_actions )
+        self.target_network = nn.Linear( img_height* img_width* channels, num_actions )
 
         ##############################################################
         ######################## END YOUR CODE #######################
@@ -66,7 +68,7 @@ class Linear(DQN):
         ################ YOUR CODE HERE - 3-5 lines ##################
 
         nn_net = getattr(self, network)
-        out = nn_net( torch.flatten( state , start_dim=1) )  # forward ( batch_size ,  flatten_features )
+        out = nn_net( torch.flatten( state , start_dim=1) )  # forward data (batch_size, flatten_features) through network
 
         ##############################################################
         ######################## END YOUR CODE #######################
@@ -139,6 +141,14 @@ class Linear(DQN):
 
         ##############################################################
         ##################### YOUR CODE HERE - 3-5 lines #############
+    
+        # Q_Sample: (batch_size,)
+        Q_sample = rewards + gamma * torch.max( target_q_values ,dim=1 ).values * ( ~done_mask )
+        # Q : (batch_size,)
+        filt = torch.nn.functional.one_hot ( actions.to(torch.int64), num_classes = num_actions ) == 1
+        Q = q_values [ filt ]
+    
+        return torch.nn.functional.mse_loss ( Q_sample , Q  )  # default reduction='mean'
 
         ##############################################################
         ######################## END YOUR CODE #######################
@@ -155,6 +165,8 @@ class Linear(DQN):
         """
         ##############################################################
         #################### YOUR CODE HERE - 1 line #############
+
+        self.optimizer = torch.optim.Adam( self.q_network.parameters()  )
 
         ##############################################################
         ######################## END YOUR CODE #######################

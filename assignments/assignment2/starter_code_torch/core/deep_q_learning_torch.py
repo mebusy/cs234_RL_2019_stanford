@@ -156,7 +156,7 @@ class DQN(QN):
             action_values: (np array) q values for all actions
         """
         with torch.no_grad():
-            s = Tensor(state, dtype=torch.uint8, device=self.device).unsqueeze(0)
+            s = torch.tensor(state, dtype=torch.uint8, device=self.device).unsqueeze(0)
             s = self.process_state(s)
             action_values = self.get_q_values(s, 'q_network').squeeze().to('cpu').tolist()
         action = np.argmax(action_values)
@@ -186,11 +186,11 @@ class DQN(QN):
 
         # Convert to Tensor and move to correct device
         self.timer.start('update_step/converting_tensors')
-        s_batch = Tensor(s_batch, dtype=torch.uint8, device=self.device)
-        a_batch = Tensor(a_batch, dtype=torch.uint8, device=self.device)
-        r_batch = Tensor(r_batch, dtype=torch.float, device=self.device)
-        sp_batch = Tensor(sp_batch, dtype=torch.uint8, device=self.device)
-        done_mask_batch = Tensor(done_mask_batch, dtype=torch.bool, device=self.device)
+        s_batch = torch.tensor(s_batch, dtype=torch.uint8, device=self.device)
+        a_batch = torch.tensor(a_batch, dtype=torch.uint8, device=self.device)
+        r_batch = torch.tensor(r_batch, dtype=torch.float, device=self.device)
+        sp_batch = torch.tensor(sp_batch, dtype=torch.uint8, device=self.device)
+        done_mask_batch = torch.tensor(done_mask_batch, dtype=torch.bool, device=self.device)
         self.timer.end('update_step/converting_tensors')
 
         # Reset Optimizer
