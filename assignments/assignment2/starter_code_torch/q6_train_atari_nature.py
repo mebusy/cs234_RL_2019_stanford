@@ -41,10 +41,12 @@ if __name__ == '__main__':
             config.lr_nsteps)
 
     # Check weights
-    # load_path = Path(config.load_path)
-    # if load_path.is_file():
-    #     print(f'File {load_path} exists, skipping download')
-    # else:
+    load_path = Path(config.load_path)
+    if load_path.is_file():
+        print(f'File {load_path} exists, skipping download')
+    else:
+        delattr( config , "load_path" )
+
     #     print(f'Downloading weights...')
     #     subprocess.call(["wget", "-P", "weights/", "http://web.stanford.edu/~haojun/model.weights_step=2000000"])
     #     print(f'Finished downloading weights')
