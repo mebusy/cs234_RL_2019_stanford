@@ -16,7 +16,6 @@ class config():
 
     # model and training config
     # load_path         = "weights/model.weights_step=2000000"
-    load_path         = "weights.pt" # qibinyi, use temp weights generated when copying weigths to target network
     num_episodes_test = 50
     grad_clip         = True
     clip_val          = 10

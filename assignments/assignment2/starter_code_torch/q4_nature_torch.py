@@ -4,6 +4,7 @@ import torch.nn.functional as F
 
 from utils.general import get_logger
 from utils.test_env import EnvTest
+from utils.torchsummary import summary
 from q2_schedule import LinearExploration, LinearSchedule
 from q3_linear_torch import Linear
 
@@ -91,6 +92,8 @@ class NatureQN(Linear):
                 nn.Linear( 512 , num_actions ),
             )
             setattr(self, network, model )
+
+            summary( model, ( channels, img_height, img_width ),  batch_size= config.batch_size, device=self.device )
 
         ##############################################################
         ######################## END YOUR CODE #######################

@@ -150,7 +150,7 @@ class Linear(DQN):
         # Q_Sample: (batch_size,)
         Q_sample = rewards + gamma * torch.max( target_q_values ,dim=1 ).values * ( ~done_mask )
         # Q : (batch_size,)
-        filt = torch.nn.functional.one_hot ( actions.to(torch.int64), num_classes = num_actions ) == 1
+        filt = torch.nn.functional.one_hot ( actions.to(torch.long), num_classes = num_actions ) == 1
         Q = q_values [ filt ]
     
         return torch.nn.functional.mse_loss ( Q_sample , Q  )  # default reduction='mean'
