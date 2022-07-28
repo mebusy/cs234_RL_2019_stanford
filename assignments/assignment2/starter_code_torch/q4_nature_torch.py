@@ -93,7 +93,7 @@ class NatureQN(Linear):
             )
             setattr(self, network, model )
 
-            summary( model, ( channels, img_height, img_width ),  batch_size= config.batch_size, device=self.device )
+            summary( model, ( channels, img_height, img_width ),  batch_size= config.batch_size, device='cpu' )
 
         ##############################################################
         ######################## END YOUR CODE #######################
