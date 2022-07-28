@@ -77,18 +77,20 @@ class NatureQN(Linear):
         # print( f"padding: {padding_3}, output_size: {output_size}" )
 
         # NOTE: nn.Conv2d only support HCHW format
+        # To save memory
+        #   1. nn.ReLU(inplace=True),
 
         for network in ["q_network", "target_network"]:
             model = nn.Sequential(
                 nn.Conv2d(      channels ,out_channle_1, filter_size_1, stride=strider_1, padding=padding_1 ),
-                nn.ReLU(),
+                nn.ReLU(inplace=True),
                 nn.Conv2d( out_channle_1 ,out_channle_2, filter_size_2, stride=strider_2, padding=padding_2 ),
-                nn.ReLU(),
+                nn.ReLU(inplace=True),
                 nn.Conv2d( out_channle_2 ,out_channel_3, filter_size_3, stride=strider_3, padding=padding_3 ),
-                nn.ReLU(),
+                nn.ReLU(inplace=True),
                 nn.Flatten(),
                 nn.Linear( out_channel_3 * img_width * img_height , 512 ),
-                nn.ReLU(),
+                nn.ReLU(inplace=True),
                 nn.Linear( 512 , num_actions ),
             )
             setattr(self, network, model )
