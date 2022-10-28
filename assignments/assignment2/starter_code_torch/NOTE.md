@@ -35,4 +35,8 @@ return best_action if np.random.random() > self.epsilon else self.env.action_spa
         - By instead parameterizing the DQN such that it takes only a state as input and outputs the state-action values for all legal actions in that state simultaneously, we need only execute a single forward-pass per Q-Learning update.
 
 
+# Q6
 
+```bash
+docker run --rm -it -v `pwd`:/opt/work/ -e DISPLAY=${ip}:0 -v /tmp/.X11-unix:/tmp/.X11-unix  mebusy/nv_torch_gym python q6_train_atari_nature.py 
+````
